@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BtCon" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="ButtonToggle" parent="Theme.BtCon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">164dp</item>
+        <item name="android:layout_weight">5</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:background">@drawable/button_toogle_right</item>
+    </style>
+
+    <style name="buttonToggle1" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_1_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonToggle2" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_2_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonToggle3" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_3_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonToggle4" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_4_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonToggle5" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_5_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonToggle6" parent="ButtonToggle">
+        <item name="android:drawableTop">@drawable/baseline_looks_6_black_48dp</item>
+        <item name="android:paddingTop">60dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+</resources>
