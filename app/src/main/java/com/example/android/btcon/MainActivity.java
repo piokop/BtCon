@@ -129,25 +129,55 @@ public class MainActivity extends AppCompatActivity {
                     case MESSAGE_READ:
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         switch (arduinoMsg.toLowerCase()) {
-                            case "led is turned on":
+
+                            case "led is turned on":           // relay 1
+                                buttonToggle1.setChecked(true);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_white));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
-
                                 break;
                             case "led is turned off":
+                                buttonToggle1.setChecked(false);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_blue100));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
 
-                            case "led to on":
+                            case "led to on":                  // relay 2
+                                buttonToggle2.setChecked(true);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_bluegrey300));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
                             case "led to off":
+                                buttonToggle2.setChecked(false);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_amber300));
                                 break;
 
+                            case "rel3on":                      // relay 3
+                                buttonToggle3.setChecked((true));
+                                break;
+                            case "rel3off":
+                                buttonToggle3.setChecked(false);
+                                break;
 
+                            case "rel4on":                      //relay 4
+                                buttonToggle4.setChecked(true);
+                                break;
+                            case "rel4off":
+                                buttonToggle4.setChecked(false);
+                                break;
+
+                            case "rel5on":                      //relay 5
+                                buttonToggle5.setChecked(true);
+                                break;
+                            case "rel5off":
+                                buttonToggle5.setChecked(false);
+                                break;
+
+                            case"rel6on":                       //relay 6
+                                buttonToggle6.setChecked(true);
+                                break;
+                            case "rel6off":
+                                buttonToggle6.setChecked(false);
+                                break;
                         }
                         break;
                 }
