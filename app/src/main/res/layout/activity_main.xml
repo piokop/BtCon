@@ -23,8 +23,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:subtitleTextColor="@android:color/background_light"
-            app:title="BlutController"
-            app:titleTextColor="@android:color/background_light" />
+            app:title="BtCon"
+            app:titleTextColor="@android:color/background_light"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

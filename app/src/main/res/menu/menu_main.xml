@@ -2,9 +2,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.btcon.MainActivity">
+
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:icon="@drawable/baseline_settings_white_24dp"
+        android:orderInCategory="200"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+
+        app:showAsAction="always" >
+
+        <menu>
+            <item android:id="@+id/submenu"
+                android:title="@string/mono"/>
+
+
+            <item android:id="@+id/submenu_1"
+                android:title="@string/bi" />
+
+
+            <item android:id="@+id/submenu_3"
+                android:title="@string/quit" />
+
+            <item android:id="@+id/disable_all"
+                android:title="@string/disable_all"
+                android:orderInCategory="100"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/times"
+        android:title="@string/czas_flow"
+        android:icon="@drawable/baseline_timer_white_24dp"
+        android:orderInCategory="150"
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -15,15 +15,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.android.btcon.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
+    private ToggleButton buttonToggle1,buttonToggle2, buttonToggle3, buttonToggle4, buttonToggle5, buttonToggle6 ;
 
 
     @SuppressLint("NonConstantResourceId")
@@ -49,18 +51,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+//        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+//        setSupportActionBar(binding.toolbar);
         // UI Initialization
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+
         final Toolbar toolbar = findViewById(R.id.toolbar);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         final TextView textViewInfo = findViewById(R.id.textViewInfo);
-        ToggleButton buttonToggle1 = findViewById(R.id.buttonToggle1);
-        final ToggleButton buttonToggle2 = findViewById(R.id.buttonToggle2);
-        final ToggleButton buttonToggle3 = findViewById(R.id.buttonToggle3);
-        final ToggleButton buttonToggle4 = findViewById(R.id.buttonToggle4);
-        final ToggleButton buttonToggle5 = findViewById(R.id.buttonToggle5);
-        final ToggleButton buttonToggle6 = findViewById(R.id.buttonToggle6);
+        buttonToggle1 = findViewById(R.id.buttonToggle1);
+        buttonToggle2 = findViewById(R.id.buttonToggle2);
+        buttonToggle3 = findViewById(R.id.buttonToggle3);
+        buttonToggle4 = findViewById(R.id.buttonToggle4);
+        buttonToggle5 = findViewById(R.id.buttonToggle5);
+        buttonToggle6 = findViewById(R.id.buttonToggle6);
+
+//        final ToggleButton buttonToggle6 = findViewById(R.id.buttonToggle6);
+
         buttonToggle1.setEnabled(false);
         buttonToggle2.setEnabled(false);
         buttonToggle3.setEnabled(false);
@@ -130,54 +141,56 @@ public class MainActivity extends AppCompatActivity {
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         switch (arduinoMsg.toLowerCase()) {
 
-                            case "led is turned on":           // relay 1
+                            case "1_on":                  // relay 1
                                 buttonToggle1.setChecked(true);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_white));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
-                            case "led is turned off":
+                            case "1_off":
                                 buttonToggle1.setChecked(false);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_blue100));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
 
-                            case "led to on":                  // relay 2
+                            case "2_on":                  // relay 2
                                 buttonToggle2.setChecked(true);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_bluegrey300));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
-                            case "led to off":
+                            case "2_off":
                                 buttonToggle2.setChecked(false);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_amber300));
                                 break;
 
-                            case "rel3on":                      // relay 3
+                            case "3_on":                      // relay 3
                                 buttonToggle3.setChecked((true));
                                 break;
-                            case "rel3off":
+                            case "3_off":
                                 buttonToggle3.setChecked(false);
                                 break;
 
-                            case "rel4on":                      //relay 4
+                            case "4_on":                      //relay 4
                                 buttonToggle4.setChecked(true);
                                 break;
-                            case "rel4off":
+                            case "4_off":
                                 buttonToggle4.setChecked(false);
                                 break;
 
-                            case "rel5on":                      //relay 5
+                            case "5_on":                      //relay 5
                                 buttonToggle5.setChecked(true);
                                 break;
-                            case "rel5off":
+                            case "5_off":
                                 buttonToggle5.setChecked(false);
                                 break;
 
-                            case"rel6on":                       //relay 6
+                            case "6_on":                       //relay 6
                                 buttonToggle6.setChecked(true);
                                 break;
-                            case "rel6off":
+                            case "6_off":
                                 buttonToggle6.setChecked(false);
                                 break;
+
+
                         }
                         break;
                 }
@@ -280,7 +293,10 @@ public class MainActivity extends AppCompatActivity {
             connectedThread.write(cmdText);
         });
 
+
+
     }
+
 
 
     /* ============================ Thread to Create Bluetooth Connection =================================== */
@@ -448,12 +464,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -466,15 +476,52 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.times:
+//                openSetTimeActivity();
+                Toast.makeText(this, "ustaw czas",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.submenu:
+                String cmdText2;
+                cmdText2 = "at+mobi=0\r";
+                // Send command to controller
+                connectedThread.write(cmdText2);
+                Toast.makeText(this, "Wybrano tryb monostabilny",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.submenu_1:
+                String cmdText1;
+                cmdText1 = "at+mobi=1\r";
+                // Send command to controller
+                connectedThread.write(cmdText1);
+                Toast.makeText(this, "Wybrano tryb bistabilny",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.submenu_3:
+//                endBlueExitApp();
+                onBackPressed();
+                return true;
+
+            case R.id.disable_all:
+                String cmdText;
+                cmdText = "disable\r";
+                // Send command to controller
+                connectedThread.write(cmdText);
+
+//                cancelAllTimers();
+
+                Toast.makeText(this, "Wyłączone wszystkie",
+                        Toast.LENGTH_SHORT).show();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
