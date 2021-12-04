@@ -92,7 +92,7 @@
 
         <ToggleButton
             android:id="@+id/buttonToggle3"
-            style="@style/buttonToggle4"
+            style="@style/buttonToggle3"
             android:layout_width="match_parent"
             android:layout_height="164dp"
             android:layout_weight="5"

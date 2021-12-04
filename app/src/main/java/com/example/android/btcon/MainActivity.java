@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
-    private ToggleButton buttonToggle1,buttonToggle2, buttonToggle3, buttonToggle4, buttonToggle5, buttonToggle6 ;
-
+    private ToggleButton buttonToggle1,buttonToggle2, buttonToggle3, buttonToggle4, buttonToggle5, buttonToggle6;
+    int stat = 1;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         imageView.setBackgroundColor(getResources().getColor(R.color.material_white));
 
 
-
         // If a bluetooth device has been selected from SelectDeviceActivity
         deviceName = getIntent().getStringExtra("deviceName");
         if (deviceName != null) {
@@ -113,11 +112,13 @@ public class MainActivity extends AppCompatActivity {
         /* Second most important piece of Code. GUI Handler */
 
         handler = new Handler(Looper.getMainLooper()) {
+
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case CONNECTING_STATUS:
                         switch (msg.arg1) {
+
                             case 1:
                                 toolbar.setSubtitle("Connected to " + deviceName);
                                 progressBar.setVisibility(View.GONE);
@@ -131,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
                             case -1:
                                 toolbar.setSubtitle("Device fails to connect");
                                 progressBar.setVisibility(View.GONE);
-
-
                                 break;
                         }
                         break;
@@ -196,6 +195,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+
+
 
   // switches
         buttonToggle1.setOnClickListener(view -> {
@@ -294,8 +296,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        if (stat==1) {
+
+            String cmdText;
+            cmdText = "status\r";
+            // Send command to Arduino board
+            assert cmdText != null;
+            connectedThread.write(cmdText);
+            stat=1;
+        }
+
+
+
 
     }
+
+
+
+
+
+
+
+
 
 
 
