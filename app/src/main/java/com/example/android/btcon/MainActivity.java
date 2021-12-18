@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
     private ToggleButton buttonToggle1,buttonToggle2, buttonToggle3, buttonToggle4, buttonToggle5, buttonToggle6;
-    int stat = 1;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -51,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//        setSupportActionBar(binding.toolbar);
         // UI Initialization
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -69,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         buttonToggle4 = findViewById(R.id.buttonToggle4);
         buttonToggle5 = findViewById(R.id.buttonToggle5);
         buttonToggle6 = findViewById(R.id.buttonToggle6);
-
-//        final ToggleButton buttonToggle6 = findViewById(R.id.buttonToggle6);
 
         buttonToggle1.setEnabled(false);
         buttonToggle2.setEnabled(false);
@@ -109,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        /* Second most important piece of Code. GUI Handler */
 
+        /* Second most important piece of Code. GUI Handler */
         handler = new Handler(Looper.getMainLooper()) {
 
             @Override
@@ -118,16 +112,25 @@ public class MainActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case CONNECTING_STATUS:
                         switch (msg.arg1) {
-
                             case 1:
-                                toolbar.setSubtitle("Connected to " + deviceName);
-                                progressBar.setVisibility(View.GONE);
-                                buttonToggle1.setEnabled(true);
-                                buttonToggle2.setEnabled(true);
-                                buttonToggle3.setEnabled(true);
-                                buttonToggle4.setEnabled(true);
-                                buttonToggle5.setEnabled(true);
-                                buttonToggle6.setEnabled(true);
+                                    toolbar.setSubtitle("Connected to " + deviceName);
+                                    progressBar.setVisibility(View.GONE);
+                                    buttonToggle1.setEnabled(true);
+                                    
+                                    buttonToggle2.setEnabled(true);
+                                    buttonToggle3.setEnabled(true);
+                                    buttonToggle4.setEnabled(true);
+                                    buttonToggle5.setEnabled(true);
+                                    buttonToggle6.setEnabled(true);
+
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                String cmdText="out_state\r";    // out relays state
+                                connectedThread.write(cmdText);
+
                                 break;
                             case -1:
                                 toolbar.setSubtitle("Device fails to connect");
@@ -139,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
                     case MESSAGE_READ:
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         switch (arduinoMsg.toLowerCase()) {
-
                             case "1_on":                  // relay 1
                                 buttonToggle1.setChecked(true);
                                 imageView.setBackgroundColor(getResources().getColor(R.color.material_white));
@@ -188,8 +190,7 @@ public class MainActivity extends AppCompatActivity {
                             case "6_off":
                                 buttonToggle6.setChecked(false);
                                 break;
-
-
+                            // Send command to Arduino board
                         }
                         break;
                 }
@@ -294,32 +295,7 @@ public class MainActivity extends AppCompatActivity {
             assert cmdText != null;
             connectedThread.write(cmdText);
         });
-
-
-        if (stat==1) {
-
-            String cmdText;
-            cmdText = "status\r";
-            // Send command to Arduino board
-            assert cmdText != null;
-            connectedThread.write(cmdText);
-            stat=1;
-        }
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 
     /* ============================ Thread to Create Bluetooth Connection =================================== */
     public static class CreateConnectThread extends Thread {
@@ -493,6 +469,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
