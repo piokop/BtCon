@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                                     toolbar.setSubtitle("Connected to " + deviceName);
                                     progressBar.setVisibility(View.GONE);
                                     buttonToggle1.setEnabled(true);
-                                    
+
                                     buttonToggle2.setEnabled(true);
                                     buttonToggle3.setEnabled(true);
                                     buttonToggle4.setEnabled(true);
@@ -526,7 +526,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return false;
     }
-
 
 
 }

@@ -32,14 +32,14 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        app:tint="@android:color/white"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="22dp"
+        android:contentDescription="@string/todo"
         android:src="@drawable/baseline_bluetooth_searching_white_48dp"
-        android:contentDescription="@string/todo" />
+        app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
