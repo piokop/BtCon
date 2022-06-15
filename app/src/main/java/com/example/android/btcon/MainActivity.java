@@ -113,22 +113,21 @@ public class MainActivity extends AppCompatActivity {
                     case CONNECTING_STATUS:
                         switch (msg.arg1) {
                             case 1:
-                                    toolbar.setSubtitle("Connected to " + deviceName);
-                                    progressBar.setVisibility(View.GONE);
-                                    buttonToggle1.setEnabled(true);
-
-                                    buttonToggle2.setEnabled(true);
-                                    buttonToggle3.setEnabled(true);
-                                    buttonToggle4.setEnabled(true);
-                                    buttonToggle5.setEnabled(true);
-                                    buttonToggle6.setEnabled(true);
+                                toolbar.setSubtitle("Connected to " + deviceName);
+                                progressBar.setVisibility(View.GONE);
+                                buttonToggle1.setEnabled(true);
+                                buttonToggle2.setEnabled(true);
+                                buttonToggle3.setEnabled(true);
+                                buttonToggle4.setEnabled(true);
+                                buttonToggle5.setEnabled(true);
+                                buttonToggle6.setEnabled(true);
 
                                 try {
                                     Thread.sleep(100);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                String cmdText="out_state\r";    // out relays state
+                                String cmdText="send_button_status\r";
                                 connectedThread.write(cmdText);
 
                                 break;
